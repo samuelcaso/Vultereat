@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VULTEAT — Experiencia Premium</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- PANTALLA 1: BIENVENIDA Y PRESUPUESTO -->
+    <div class="screen active" id="screen-welcome">
+        <div class="container">
+            <h1 class="logo">VULTEAT</h1>
+            <p class="subtitle">Experiencia gastronómica curada</p>
+            
+            <div class="input-group">
+                <label for="budget">¿Cuánto tienes para hoy?</label>
+                <div class="input-wrapper">
+                    <span class="currency">$</span>
+                    <input type="number" id="budget" placeholder="20000" min="0" step="1000">
+                </div>
+            </div>
+
+            <button class="btn-primary" id="btn-continue">Continuar</button>
+        </div>
+    </div>
+
+    <!-- PANTALLA 2: SELECCIÓN DE GUSTOS -->
+    <div class="screen" id="screen-preferences">
+        <div class="container">
+            <h2>¿Qué te apetece hoy?</h2>
+            <p class="hint">Selecciona tus preferencias</p>
+
+            <div class="preferences-grid">
+                <button class="preference-card" data-pref="carne">
+                    <div class="icon">🥩</div>
+                    <span>Carne</span>
+                </button>
+                <button class="preference-card" data-pref="vegetariano">
+                    <div class="icon">🌱</div>
+                    <span>Vegetariano</span>
+                </button>
+                <button class="preference-card" data-pref="picante">
+                    <div class="icon">🌶️</div>
+                    <span>Picante</span>
+                </button>
+                <button class="preference-card" data-pref="gourmet">
+                    <div class="icon">⭐</div>
+                    <span>Gourmet</span>
+                </button>
+                <button class="preference-card" data-pref="clasico">
+                    <div class="icon">🍔</div>
+                    <span>Clásico</span>
+                </button>
+            </div>
+
+            <button class="btn-primary" id="btn-get-recommendations">Ver Recomendaciones</button>
+        </div>
+    </div>
+
+    <!-- PANTALLA 3: RECOMENDACIONES -->
+    <div class="screen" id="screen-recommendations">
+        <div class="container">
+            <h2>Recomendado para ti</h2>
+            <p class="budget-display">Presupuesto: <span id="budget-display">$0</span></p>
+
+            <div id="recommendations-container"></div>
+
+            <button class="btn-secondary" id="btn-see-all">Ver menú completo</button>
+        </div>
+    </div>
+
+    <!-- PANTALLA 4: MENÚ COMPLETO -->
+    <div class="screen" id="screen-menu">
+        <div class="container">
+            <h2>Menú Completo</h2>
+            
+            <div class="menu-section">
+                <h3>Hamburguesas</h3>
+                <div id="burgers-container" class="products-grid"></div>
+            </div>
+
+            <div class="menu-section">
+                <h3>Ensaladas</h3>
+                <div id="salads-container" class="products-grid"></div>
+            </div>
+
+            <div class="menu-section">
+                <h3>Acompañamientos</h3>
+                <div id="sides-container" class="products-grid"></div>
+            </div>
+
+            <div class="menu-section">
+                <h3>Bebidas</h3>
+                <div id="drinks-container" class="products-grid"></div>
+            </div>
+
+            <button class="btn-primary" id="btn-view-cart">Ver mi pedido</button>
+        </div>
+    </div>
+
+    <!-- PANTALLA 5: RESUMEN Y CONFIRMACIÓN -->
+    <div class="screen" id="screen-cart">
+        <div class="container">
+            <h2>Tu pedido</h2>
+
+            <div id="cart-items"></div>
+
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="subtotal">$0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Impuestos (19%)</span>
+                    <span id="taxes">$0</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="total">$0</span>
+                </div>
+            </div>
+
+            <button class="btn-primary" id="btn-confirm-order">Proceder al pago</button>
+            <button class="btn-secondary" id="btn-back-to-menu">Seguir comprando</button>
+        </div>
+    </div>
+
+    <!-- PANTALLA 5B: RESUMEN PRE-PAGO -->
+    <div class="screen" id="screen-payment">
+        <div class="container">
+            <h2>Confirma tu pedido</h2>
+            
+            <div class="order-summary-card">
+                <h3>Resumen del pedido</h3>
+                
+                <div class="summary-section">
+                    <p class="summary-label">Presupuesto inicial:</p>
+                    <p class="summary-value" id="summary-budget">$0</p>
+                </div>
+
+                <div class="summary-section">
+                    <p class="summary-label">Preferencias seleccionadas:</p>
+                    <div id="summary-preferences" class="preferences-list"></div>
+                </div>
+
+                <div class="summary-section">
+                    <p class="summary-label">Productos en tu pedido:</p>
+                    <div id="summary-items"></div>
+                </div>
+
+                <div class="summary-section final-amount">
+                    <p class="summary-label">Total a pagar:</p>
+                    <p class="summary-value total-payment" id="summary-total">$0</p>
+                </div>
+            </div>
+
+            <div class="payment-section">
+                <h3>Método de pago</h3>
+                <!-- PayPal Button Container -->
+                <div id="paypal-button-container"></div>
+            </div>
+
+            <button class="btn-secondary" id="btn-back-to-cart">Volver al carrito</button>
+        </div>
+    </div>
+
+    <!-- PANTALLA 6: CONFIRMACIÓN FINAL -->
+    <div class="screen" id="screen-success">
+        <div class="container success-container">
+            <div class="success-icon">✓</div>
+            <h2>¡Gracias por tu compra!</h2>
+            <p class="success-message">Tu pago ha sido procesado exitosamente</p>
+            
+            <div class="order-details-final">
+                <p><strong>ID de transacción:</strong> <span id="transaction-id">---</span></p>
+                <p><strong>Total pagado:</strong> <span id="amount-paid">$0</span></p>
+                <p><strong>Método:</strong> PayPal</p>
+            </div>
+            
+            <p class="success-submessage">Tu experiencia VULTEAT está en camino 🚀</p>
+            <button class="btn-primary" id="btn-new-order">Nuevo pedido</button>
+        </div>
+    </div>
+
+    <!-- CARRITO FLOTANTE -->
+    <div class="floating-cart" id="floating-cart">
+        <span id="cart-count">0</span>
+        <span class="cart-text">Pedido</span>
+    </div>
+
+    <!-- PayPal SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AbKl3mNUqziSUgTxYX4yj3zqEvVHaRm6ZejwGlLnTehpDrMuWaiEFj_4fzQrJwfhMqkluYQ97hK6G8vl&currency=USD"></script>
+    <script src="script.js"></script>
+</body>
+</html>
